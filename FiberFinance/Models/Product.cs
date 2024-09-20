@@ -7,15 +7,21 @@ namespace FiberFinance.Models
 
 
         public int Id { get; set; }
-        public Item Item { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public float Price { get; set; }
+
+
         public ICollection<RawMaterial> Materials { get; set; }= new List<RawMaterial>();
 
         public Product() { }
 
-        public Product(int id, Item item)
+        public Product(int id, string name, string? description, float price)
         {
             Id = id;
-            Item = item;
+            Name = name;
+            Description = description;
+            Price = price;
         }
 
 

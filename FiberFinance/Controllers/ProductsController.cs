@@ -1,46 +1,50 @@
-﻿using FiberFinance.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
-using FiberFinance.services;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using FiberFinance.Data;
 using FiberFinance.Models;
-namespace FiberFinance.Controllers;
+using FiberFinance.services;
 
-public class ProductsController : Controller
+namespace FiberFinance.Controllers
 {
-    private readonly ProductsServices _productsServices;
-    private readonly FiberFinanceContext _context;
-
-    public ProductsController(ProductsServices productsServices, FiberFinanceContext context)
-    {
-        _productsServices = productsServices;
-        _context = context;
-    }
-
-
-
-
-
-    public async Task<IActionResult> Index()
-    {
-        return View(await _context.Product.ToListAsync());
-    }
-
-
-    public async Task<IActionResult> Create()
+    public class ProductsController : Controller
     {
 
-        return View();
+        private readonly ProductsServices _productsServices;
+
+        public ProductsController(ProductsServices productsServices)
+        {
+            _productsServices = productsServices;
+        }
+
+        // GET: Products
+        public IActionResult Index()
+        {
+            var list = _productsServices.GetAll();
+
+            return View(list);
+        }
+
+
+        public IActionResult Create()
+        {
+             return View();
+        
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Product product)
+        {
+            _productsServices.Insert(product);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
 
     }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(Product product)
-    {
-       _productsServices.Insert(product);
-        return RedirectToAction(nameof(Index));
-
-    }
-
 }

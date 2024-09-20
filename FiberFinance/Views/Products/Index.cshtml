@@ -1,1 +1,50 @@
-﻿@model IEnumerable<FiberFinance.Models.Product><p>    <a asp-action="Create">Adicionar produtos</a></p><table class="table table-striped table-hover">    <thead>        <tr>            <th>                @Html.DisplayNameFor(model => model.Item.Name)            </th>            <th>                @Html.DisplayNameFor(model => model.Item.Description)            </th>            <th>                @Html.DisplayNameFor(model => model.Item.Price)            </th>        </tr>    </thead>    <tbody>@foreach (var Product in Model) {            <tr>        <td>                @Html.DisplayFor(modelItem => Product.Item.Name)        </td>        <td>                @Html.DisplayFor(modelItem => Product.Item.Description)        </td>        <td>                @Html.DisplayFor(modelItem => Product.Item.Price)                      </td>                        <td>                <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |                <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |                <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>            </td>        </tr>}    </tbody></table>
+﻿@model IEnumerable<FiberFinance.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Adicionar produtos</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Product.Price)
+
+                </td>
+
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -16,8 +16,8 @@ namespace FiberFinance.services
 
         public void Insert(Product product)
         {
-
             _context.Add(product);
+         
             _context.SaveChanges();
         
         }

@@ -22,7 +22,7 @@ namespace FiberFinance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FiberFinance.Models.Item", b =>
+            modelBuilder.Entity("FiberFinance.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,24 +41,6 @@ namespace FiberFinance.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.ToTable("Item");
-                });
-
-            modelBuilder.Entity("FiberFinance.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("Product");
                 });
@@ -89,17 +71,6 @@ namespace FiberFinance.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("RawMaterial");
-                });
-
-            modelBuilder.Entity("FiberFinance.Models.Product", b =>
-                {
-                    b.HasOne("FiberFinance.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("FiberFinance.Models.RawMaterial", b =>

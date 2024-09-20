@@ -16,7 +16,7 @@ namespace FiberFinance.Data
 
         public DbSet<FiberFinance.Models.RawMaterial> RawMaterial { get; set; } = default!;
         public DbSet<FiberFinance.Models.Product> Product { get; set; } = default!;
-        public DbSet<FiberFinance.Models.Item> Item { get; set; } = default!;
+       
       
     }
 }
