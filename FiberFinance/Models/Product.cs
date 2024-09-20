@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NuGet.Protocol.Plugins;
+using System.Collections.Generic;
 namespace FiberFinance.Models
 {
     public class Product
@@ -7,7 +8,7 @@ namespace FiberFinance.Models
 
         public int Id { get; set; }
         public Item Item { get; set; }
-        public IEnumerable<RawMaterial> Materials { get; set; }= new List<RawMaterial>();
+        public ICollection<RawMaterial> Materials { get; set; }= new List<RawMaterial>();
 
         public Product() { }
 
@@ -16,5 +17,19 @@ namespace FiberFinance.Models
             Id = id;
             Item = item;
         }
+
+
+
+        public void AddMaterial(RawMaterial material)
+        {
+            Materials.Add(material);
+
+
+        }
+
+
+
     }
+
+
 }

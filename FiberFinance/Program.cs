@@ -2,14 +2,16 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FiberFinance.Data;
+using FiberFinance.services;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<FiberFinanceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FiberFinanceContext") ?? throw new InvalidOperationException("Connection string 'FiberFinanceContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<ProductsServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
